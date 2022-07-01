@@ -1,8 +1,9 @@
 # YouWho
 An automated attendance system which works on video feed from the classroom.
 
-How To Run ? \n
-	1. clone it on to your computer \n
+How To Run ? 
+
+	1. clone it on to your computer 
 	2. make a separate python virtual environment or use the default one already installed on your machine
 	3. Download this file
 	4. put it inside \Attendance-System-Using-Face-Recognition\face_recognition_data directory
