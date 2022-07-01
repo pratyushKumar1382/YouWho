@@ -1,7 +1,7 @@
 # YouWho
 An automated attendance system which works on video feed from the classroom.
 <p>
-	<img src="/mario1.gif" width="700" />
+	<img src="/User-Interface.png" width="700" />
 </p>
 How To Run ? 
 
