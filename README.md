@@ -1,6 +1,8 @@
 # YouWho
 An automated attendance system which works on video feed from the classroom.
-
+<p>
+	<img src="/mario1.gif" width="700" />
+</p>
 How To Run ? 
 
 	1. clone it on to your computer 
