@@ -1,0 +1,235 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <script src="https://kit.fontawesome.com/0ea7a79ca0.js" crossorigin="anonymous"></script>
+    <!-- <script src="scripts/index.js"></script> -->
+    <title>YouWho - Face Recognition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: grid;
+            grid-template-rows: 80px auto;
+            gap: 10px;
+
+        }
+
+        .nav-bar {
+            display: grid;
+            grid-template-columns: 300px auto;
+            box-shadow: 0px 1px 1px #888888;
+            position: sticky;
+            top: 0px;
+            width: 100%;
+            background-color: white;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            margin-left: 50px;
+            padding: 10px;
+        }
+
+        .logo-img {
+            width: 80%;
+        }
+
+        .logo-img:hover {
+            cursor: pointer;
+        }
+
+        .right-nav {
+            display: flex;
+            align-items: center;
+            margin-right: 50px;
+            justify-content: right;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            /* background-color: rgb(73, 197, 255); */
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: black;
+            padding: 10px 20px;
+            margin-left: 7.5px;
+            margin-right: 7.5px;
+            transition: 0.2s;
+            border-radius: 15px;
+            font-size: 15px;
+            font-weight: 550;
+        }
+
+        .sign_in {
+            /* border: solidwhite 1px; */
+            background-color: rgba(0, 157, 29, 0.771);
+            box-shadow: 1px 2px 5px #888888;
+            color: white;
+        }
+
+        .sign_up {
+            border: solid black 1px;
+        }
+
+        .nav-link:hover {
+            background-color: rgb(8, 131, 65);
+            color: white;
+            border-color: transparent;
+        }
+
+        .main {
+            display: grid;
+            margin: 10px 50px;
+            gap: 20px;
+        }
+
+        .feature {
+            display: grid;
+            grid-template-columns: 200px 9fr;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .icon_div {
+            text-align: center;
+            justify-self: end;
+        }
+
+        .icon_div button {
+            padding: 20px;
+            height: 100%;
+            border-radius: 20px;
+            border-color: rgba(0, 157, 29, 0.771);
+            background-color: transparent;
+            transition: 0.2s;
+        }
+
+        .icon_div button:hover {
+            background-color: rgb(235, 235, 235);
+            cursor: pointer;
+        }
+
+        .icon {
+            font-size: 60px;
+            color: rgba(0, 157, 29, 0.771);
+        }
+
+        .details {
+            border-left: solid;
+            padding-left: 20px;
+            /* border-radius: 10px; */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <img src='{% static "recognition/img/logo.png"%}' alt="logo" class="logo-img">
+        </div>
+        <div class="right-nav">
+            <ul class="nav-list">
+                <li><a href='{%url "login" %}' class="nav-link sign_in">Sign In<a></li>
+                <li><a href="#" class="nav-link sign_up">Sign Up</a></li>
+                <!-- <li><a href="#" class="nav-link">About Us</a></li>
+                <li><a href="#" class="nav-link">Contact</a></li> -->
+            </ul>
+            <!-- <div class="search">
+                <input type="text" name="search" id="search-input">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+            </div> -->
+        </div>
+    </nav>
+    <div class="main">
+        <div class="feature">
+            <div class="icon_div"><button type="button" id="upload_popup_btn"><a
+                        href='{%url "mark-your-attendance" %}'><i class="fas fa-upload icon"></i></a></button></div>
+            <div class="details">
+                <div class="info">
+                    <h2>Mark Attendance - In</h2>
+                    <p>Opens the camera and marks the attendance of registered students/faculty as they come in.</p>
+                </div>
+            </div>
+            <!-- <div class="upload_form" id="upload_form">
+                <h2>Choose an image to upload</h2>
+                <hr><br>
+                <form method='POST' action="php/upload.php" enctype="multipart/form-data">
+
+                    <label for="myfile">Select Images:</label>
+                    <input type="file" id="myfile" name="file">
+                    <br><br>
+                    <button type="submit" id="upload_btn_form_popup" name="upload">Upload</button>
+                    <button type="submit" name="submit" value="Upload" id="upload_btn_form_popup">Upload</button>
+                </form>
+                <br>
+                <button id="cancel_btn_form_popup">Cancel</button>
+            </div> -->
+        </div>
+
+        <div class="feature">
+            <div class="icon_div"><button id="mark_attendance_btn"><a href='{%url "mark-your-attendance-out" %}'><i
+                            class="fas fa-user-check icon"></i></a></button></div>
+            <div class="details">
+                <div class="info">
+                    <h2>Mark Attendance - Out</h2>
+                    <p>Marks the time at which the student/faculty left the LHC premises.
+                    </p>
+                </div>
+            </div>
+            <!-- <div class="success_popup" id="success_popup">
+                <h2>Success !!</h2>
+                <br>
+                <h4>Attendance marked successfuly. Now, download the .csv report from the button below.</h4>
+                <br><hr>
+                <br>
+                <button id="cancel_btn_success_popup">Cancel</button>
+            </div> -->
+        </div>
+
+        <!-- <div class="feature">
+            <div class="icon_div"><button><a href="Attendance.csv" download><i
+                            class="fas fa-download icon"></i></a></button></div>
+            <div class="details">
+                <div class="info">
+                    <h2>Download Attendance Report</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id omnis, molestiae quia
+                        consectetur illo dignissimos, adipisci fuga assumenda labore obcaecati minus minima
+                        exercitationem
+                        molestias quidem voluptatibus optio repellendus accusamus unde voluptatem dolore pariatur
+                    </p>
+                </div>
+            </div>
+        </div> -->
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

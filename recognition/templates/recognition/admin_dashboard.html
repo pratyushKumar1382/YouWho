@@ -1,0 +1,305 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/0ea7a79ca0.js" crossorigin="anonymous"></script>
+    <script src="scripts/index.js"></script>
+    <title>YouWho - Face Recognition</title>
+
+    <script  type='text/javascript'
+src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'>
+$(document).ready(function(){
+  $("#train").click(function(){
+    alert("Training begun. This may take upto 5 minutes. Please wait.");
+  });
+});
+</script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 80px auto;
+    gap: 10px;
+
+}
+
+.nav-bar {
+    display: grid;
+    grid-template-columns: 300px auto;
+    box-shadow: 0px 1px 1px #888888;
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    background-color: white;
+}
+
+.logo {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 50px;
+    padding: 10px;
+}
+
+.logo-img {
+    width: 80%;
+}
+
+.logo-img:hover {
+    cursor: pointer;
+}
+
+.right-nav {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+    justify-content: right;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    /* background-color: rgb(73, 197, 255); */
+}
+
+.nav-link {
+    text-decoration: none;
+    color: black;
+    padding: 10px 20px;
+    margin-left: 7.5px;
+    margin-right: 7.5px;
+    transition: 0.2s;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: 550;
+}
+
+.sign_in {
+    /* border: solidwhite 1px; */
+    background-color: rgba(0, 157, 29, 0.771);
+    box-shadow: 1px 2px 5px #888888;
+    color: white;
+}
+
+.sign_up {
+    border: solid black 1px;
+}
+
+.nav-link:hover {
+    background-color: rgb(8, 131, 65);
+    color: white;
+    border-color: transparent;
+}
+
+/* #search-input {
+    padding: 8px;
+    border-radius: 15px;
+    border: solid 1.5px gray;
+    font-size: 15px;
+    color: gray;
+}
+
+#search-btn {
+    border-radius: 15px;
+    border: solid 1.5px gray;
+    transition: 0.2s;
+}
+
+#search-btn:hover{
+    background-color: gray;
+    cursor: pointer;
+    color: white;
+}
+
+.fa-search {
+    font-size: 15px;
+    padding: 12px;
+} */
+
+.main {
+    display: grid;
+    margin: 10px 50px;
+    gap: 20px;
+}
+
+.feature {
+    display: grid;
+    grid-template-columns: 200px 9fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.icon_div {
+    text-align: center;
+    justify-self: end;
+}
+
+.icon_div button {
+    padding: 20px;
+    height: 100%;
+    border-radius: 20px;
+    border-color: rgba(0, 157, 29, 0.771);
+    background-color: transparent;
+    transition: 0.2s;
+}
+
+.icon_div button:hover {
+    background-color: rgb(235, 235, 235);
+    cursor: pointer;
+}
+
+.icon {
+    font-size: 60px;
+    color: rgba(0, 157, 29, 0.771);
+}
+
+.details {
+    border-left: solid;
+    padding-left: 20px;
+    /* border-radius: 10px; */
+}
+
+.upload_form, .success_popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    border: solid black 1px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 30px #888888;
+    background-color: white;
+    visibility: hidden;
+}
+
+.visible_upload_form, .visible_success_popup {
+    visibility: visible;
+}
+
+.upload_form button , .success_popup button {
+    padding: 10px;
+}
+
+.upload_form button:hover {
+    background-color: rgb(8, 131, 65)!important;
+    color: white!important;
+    border-color: transparent!important;
+}
+
+.success_popup button:hover {
+    background-color: rgb(8, 131, 65)!important;
+    color: white!important;
+    border-color: transparent!important;
+}
+
+#upload_btn_form_popup {
+    /* border: solidwhite 1px; */
+    background-color: rgba(0, 157, 29, 0.771);
+    box-shadow: 1px 2px 5px #888888;
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
+
+#cancel_btn_form_popup, #cancel_btn_success_popup {
+    border: solid black 1px;
+    border-radius: 10px;
+}
+
+#myfile {
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    border: solid black 1px;
+    padding: 5px;
+}
+</style>
+
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <img src='{% static "recognition/img/logo.png"%}' alt="logo" class="logo-img">
+        </div>
+        <div class="right-nav">
+            <ul class="nav-list">
+                <li><a href='{%url "login" %}' class="nav-link sign_in">Sign Out<a></li>
+                <li><a href="#" class="nav-link sign_up">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="main">
+        <div class="feature">
+            <div class="icon_div"><button type="button" id="upload_popup_btn"><a href="{%url 'register' %}"><i
+                class="fas fa-id-card icon"></i></a></button></div>
+            <div class="details">
+                <div class="info">
+                    <h2>Register</h2>
+                    <p>Register a new student.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="icon_div"><button type="button" id="upload_popup_btn"><a href="{%url 'add-photos'%}"><i
+                class="fas fa-images icon"></i></a></button></div>
+            <div class="details">
+                <div class="info">
+                    <h2>Add Photos</h2>
+                    <p>Take images of the newly registered student.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="icon_div"><button type="button" id="upload_popup_btn"><a href="{%url 'train' %}"><i
+                class="fas fa-brain icon"></i></a></button></div>
+            <div class="details">
+                <div class="info">
+                    <h2>Train</h2>
+                    <p>Train the network with the images of the registered student.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="icon_div"><button type="button" id="upload_popup_btn"><a href="{%url 'view-attendance-home' %}"><i
+                class="fas fa-users icon"></i></a></button></div>
+            <div class="details">
+                <div class="info">
+                    <h2>View Attendance</h2>
+                    <p>View Attendance data.</p>
+                </div>
+            </div>
+            {% if messages %}
+      {% for message in messages%}
+      <div class="alert alert-{{message.tags}}" > {{message}}
+      </div>
+      {%endfor %}
+
+    {%endif%}
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
